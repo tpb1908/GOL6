@@ -2,6 +2,9 @@
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 /**
@@ -21,7 +24,7 @@ public class WindowManager extends JFrame {
     private JButton environmentSetupButton = new JButton("Environment");
 
     //Readouts
-    private TextArea currentStatsText;
+    private JTextArea currentStatsText = new JTextArea();
 
     private MigLayout layout;
     private GridBagConstraints constraints;
@@ -31,6 +34,33 @@ public class WindowManager extends JFrame {
         setLayout(layout);
         setMinimumSize(getPreferredSize());
         initComponents();
+        addMenuBar();
+
+        final JScrollPane sp = new JScrollPane(currentStatsText);
+        currentStatsText.setBackground(Color.BLACK);
+        currentStatsText.setForeground(Color.WHITE);
+        currentStatsText.setMinimumSize(new Dimension(300, 900));
+        add(sp);
+        pack();
+    }
+
+    private void addMenuBar() {
+        final JMenuBar menuBar = new JMenuBar();
+        menuBar.add(startButton);
+        menuBar.add(pauseButton);
+        menuBar.add(stepButton);
+        menuBar.add(saveButton);
+        menuBar.add(loadButton);
+        menuBar.add(cellTemplateButton);
+        menuBar.add(environmentSetupButton);
+        menuBar.add(screenshotButton);
+        menuBar.add(gridButton);
+
+        menuBar.setForeground(Color.BLACK);
+        menuBar.setBackground(Color.WHITE);
+        menuBar.setBorder( new CompoundBorder(new LineBorder(Color.BLACK), new EmptyBorder(1,1,1,1)));
+
+        setJMenuBar(menuBar);
     }
 
     private void initComponents() {
